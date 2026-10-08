@@ -2,14 +2,92 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>코딩앤플레이 AI 게임 전시장</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코딩앤플레이 AI 게임 전시장</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #101a30;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  text-align: center;
+  padding: 65px 20px 45px;
+}
+header small { color: #5de1cf; }
+h1 { font-size: 36px; }
+header p { color: #cbd5e1; }
+.gallery {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: #24334c;
+  padding: 22px;
+  border-radius: 18px;
+}
+.thumbnail {
+  background: #334b69;
+  border-radius: 12px;
+  text-align: center;
+  padding: 40px;
+  font-size: 50px;
+}
+.card h2 { font-size: 21px; }
+.card p { color: #cbd5e1; }
+.btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  background: #21b6a8;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn:hover { background: #15998d; }
+footer {
+  text-align: center;
+  padding: 50px;
+  color: #94a3b8;
+}
+</style>
 </head>
 <body>
-  <h1>🎮 코딩앤플레이 AI 게임 전시장</h1>
-  <p>우리 학생들이 직접 만든 HTML 게임입니다!</p>
-  <h2>게임 작품 갤러리</h2>
-  <p>곧 멋진 게임들이 전시됩니다.</p>
+
+<header>
+  <small>CODING & PLAY</small>
+  <h1>🎮 AI 게임 전시장</h1>
+  <p>상상하고, 만들고, 함께 플레이!</p>
+</header>
+
+<main class="gallery">
+  <article class="card">
+    <div class="thumbnail">🖱️</div>
+    <h2>클릭 게임</h2>
+    <p>첫 번째 테스트 작품</p>
+    <a class="btn" href="games/test.html">
+      게임하기 ▶
+    </a>
+  </article>
+
+  <article class="card">
+    <div class="thumbnail">🎮</div>
+    <h2>다음 작품</h2>
+    <p>학생들의 게임 전시 예정</p>
+    <span>준비 중</span>
+  </article>
+</main>
+
+<footer>코딩앤플레이 AI코딩학원</footer>
+
 </body>
 </html>
