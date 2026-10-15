@@ -1,547 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<title>코딩앤플레이 AI 게임 전시장</title>
+<title>코딩앤플레이 · AI 게임 전시장</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: #101a30;
-  color: white;
-  font-family: Arial, sans-serif;
-}
-header {
-  text-align: center;
-  padding: 65px 20px 45px;
-}
-header small { color: #5de1cf; }
-h1 { font-size: clamp(26px, 5vw, 36px); }
-p { line-height: 1.6; }
-header p, .card p, .upload p { color: #cbd5e1; }
-.gallery {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-  gap: 24px;
-}
-.card {
-  background: #24334c;
-  padding: 22px;
-  border-radius: 18px;
-}
-.thumbnail {
-  background: #334b69;
-  border-radius: 12px;
-  text-align: center;
-  padding: 40px;
-  font-size: 50px;
-}
-.card h2 { font-size: 21px; }
-.btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  border-radius: 10px;
-  background: #21b6a8;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-.btn:hover { background: #15998d; }
-.section-wrap { padding: 0 20px; }
-.upload {
-  max-width: 960px;
-  margin: 32px auto 0;
-  padding: 28px;
-  background: #24334c;
-  border-radius: 18px;
-}
-.upload h2 { margin-top: 0; }
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-.code-row { display: flex; gap: 12px; }
-input, textarea, button { font: inherit; }
-input, textarea {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #7890ad;
-  border-radius: 10px;
-  background: #101a30;
-  color: white;
-}
-.code-row input { flex: 1; min-width: 0; }
-button {
-  padding: 13px 20px;
-  border: 0;
-  border-radius: 10px;
-  background: #21b6a8;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-button:hover:not(:disabled) { background: #15998d; }
-button:disabled { cursor: not-allowed; opacity: .65; }
-input:focus-visible, textarea:focus-visible,
-button:focus-visible, a:focus-visible {
-  outline: 3px solid #5de1cf;
-  outline-offset: 3px;
-}
-.hint { font-size: 14px; }
-#code-status { min-height: 26px; }
-#code-status[data-state="success"] { color: #7cf1c5; }
-#code-status[data-state="error"] { color: #ffb6b6; }
-fieldset {
-  min-width: 0;
-  margin-top: 24px;
-  border: 1px solid #7890ad;
-  border-radius: 12px;
-  padding: 18px;
-}
-fieldset label { margin-top: 16px; }
-fieldset button { margin-top: 18px; }
-fieldset:disabled { opacity: .7; }
-legend { padding: 0 8px; font-weight: bold; }
-#gallery-status {
-  max-width: 960px;
-  margin: 10px auto;
-  padding: 0 20px;
-  color: #cbd5e1;
-}
-dialog {
-  width: min(1100px, 95vw);
-  border: 0;
-  border-radius: 14px;
-  background: #24334c;
-  color: white;
-  padding: 20px;
-}
-dialog::backdrop { background: rgba(0,0,0,.8); }
-#game-frame {
-  width: 100%;
-  height: 70vh;
-  border: 0;
-  background: white;
-}
-footer {
-  text-align: center;
-  padding: 50px 20px;
-  color: #94a3b8;
-}
-@media (max-width: 520px) {
-  .code-row { flex-direction: column; }
-  .upload { padding: 22px; }
-}
+:root{color-scheme:light;--ink:#172039;--muted:#6c7485;--orange:#dd4b0c;--line:#e6e8ef;--paper:#f6f7fb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}a{color:inherit;text-decoration:none}svg{display:block}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #f3a16e;outline-offset:4px}[hidden]{display:none!important}.wrap{max-width:1160px;padding:0 32px;margin:0 auto}
+.site-header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:44px;height:44px;border-radius:14px;background:var(--orange);display:grid;place-items:center;color:#fff}.brand-icon svg{width:28px;height:28px}.brand-name{display:block;font-size:18px;font-weight:800;letter-spacing:-.7px}.brand-sub{display:block;font-size:10px;letter-spacing:1.8px;color:var(--muted);margin-top:5px}.nav-actions{display:flex;align-items:center;gap:26px}.nav-link{font-size:14px;font-weight:700;color:#636b7c}.primary{border:0;background:var(--orange);color:#fff;border-radius:12px;font-weight:700;padding:14px 21px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.primary:hover:not(:disabled){background:#c43d04}.primary svg{width:18px;height:18px}.hero{display:grid;grid-template-columns:1fr 235px;align-items:center;gap:60px;padding-top:66px;padding-bottom:56px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--orange);margin:0 0 20px}.hero h1{font-size:clamp(34px,4.5vw,52px);line-height:1.2;letter-spacing:-2.2px;margin:0;font-weight:850}.hero h1 span{color:var(--orange)}.hero-description{font-size:16px;line-height:1.8;color:var(--muted);margin:22px 0 0}.stat-card{padding:30px 26px;background:#fff;border:1px solid var(--line);border-radius:24px;position:relative;overflow:hidden}.stat-label{font-size:12px;color:var(--muted);margin:0}.stat-number{font-size:68px;line-height:1.15;letter-spacing:-4px;font-weight:800;margin:9px 0;color:#202b64}.stat-bottom{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px}.green-dot{width:6px;height:6px;border-radius:50%;background:#2db384;flex-shrink:0}.stat-spark{position:absolute;right:24px;top:27px;color:#d7dced;font-size:26px}
+.library{padding-bottom:70px}.library-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:22px}.heading-group{display:flex;gap:11px;align-items:center}.heading-group h2{font-size:25px;letter-spacing:-1px;margin:0}.count-badge{font-size:12px;font-weight:800;color:#425178;background:#e9edf7;border-radius:7px;padding:6px 9px}.tools{display:flex;align-items:center;gap:14px}.search{position:relative;display:block}.search svg{position:absolute;width:17px;height:17px;left:14px;top:50%;transform:translateY(-50%);color:#9299a8}.search input{width:278px;max-width:100%;padding:13px 13px 13px 41px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:13px;color:var(--ink);outline-offset:2px}.search input::placeholder{color:#959baa}.refresh{border:0;background:transparent;color:#6c7485;font-size:12px;padding:9px 0;display:flex;align-items:center;gap:6px;white-space:nowrap}.refresh svg{width:15px;height:15px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}.card{border:1px solid var(--line);border-radius:19px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-4px);box-shadow:0 12px 28px #1720390b}.card-art{height:177px;position:relative;overflow:hidden;background:linear-gradient(135deg,#7040da,#5135af);color:#fff;padding:19px 20px;display:flex;align-items:center;justify-content:center}.card-art::before{content:"";position:absolute;width:160px;height:160px;border:1px solid #ffffff1c;border-radius:50%;top:-75px;right:-26px}.card-art::after{content:"";position:absolute;width:110px;height:110px;border:1px solid #ffffff19;border-radius:24px;bottom:-60px;left:-20px;transform:rotate(30deg)}.card:nth-child(4n+2) .card-art{background:linear-gradient(135deg,#10a8b6,#087e8c)}.card:nth-child(4n+3) .card-art{background:linear-gradient(135deg,#477be8,#3553bc)}.card:nth-child(4n+4) .card-art{background:linear-gradient(135deg,#ed934c,#d96439)}.art-label{position:absolute;left:20px;top:19px;letter-spacing:2px;font-weight:700;font-size:10px;color:#ffffffd9}.art-caption{position:absolute;left:20px;bottom:17px;font-size:9px;font-weight:600;letter-spacing:1.6px;color:#ffffffb5}.art-symbol svg{width:80px;height:80px;filter:drop-shadow(0 8px 10px #00000013)}.art-star{position:absolute;right:34px;top:49px;font-size:19px;color:#ffffff74}.card-content{padding:22px;flex:1;display:flex;flex-direction:column}.card h3{font-size:19px;font-weight:800;line-height:1.4;letter-spacing:-.6px;margin:0 0 8px;overflow-wrap:anywhere}.byline{font-size:12px;color:#7c8493;margin:0;display:flex;gap:6px;align-items:center;overflow-wrap:anywhere}.byline svg{height:13px;width:13px;flex-shrink:0}.description{font-size:13px;line-height:1.7;color:#717989;margin:13px 0 20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:44px;overflow-wrap:anywhere}.play-button{margin-top:auto;width:100%;border:1px solid #e8ebf2;border-radius:10px;background:#f7f8fc;color:#26334e;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;font-size:13px;font-weight:800}.play-button svg{width:14px;height:14px}.play-button:hover{background:#fff2e9;border-color:#f8d4bc;color:var(--orange)}.gallery-status{color:var(--muted);font-size:13px;line-height:1.7;min-height:24px;margin:18px 0}.empty-note{grid-column:1/-1;padding:50px 20px;text-align:center;border:1px dashed #dce0e9;border-radius:16px;color:var(--muted);background:#fff}.bottom-callout{margin-top:30px;border-top:1px solid var(--line);padding-top:25px;display:flex;align-items:center;justify-content:space-between;gap:20px}.bottom-callout p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}.text-button{border:0;background:none;padding:8px 0;color:var(--orange);font-size:13px;font-weight:800;white-space:nowrap}.footer{border-top:1px solid var(--line);text-align:center;padding:28px 20px;color:#89909d;font-size:11px;line-height:1.8}.footer strong{color:#657083;font-weight:600}
+dialog{border:0;border-radius:22px;padding:0;color:var(--ink);background:#fff;box-shadow:0 30px 100px #101a3033;width:min(640px,calc(100vw - 28px));max-height:90vh;overflow:auto}dialog::backdrop{background:#162039a6;backdrop-filter:blur(4px)}.modal-header{padding:26px 28px 18px;display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--line)}.modal-header h2{font-size:23px;letter-spacing:-.8px;margin:0}.icon-button{width:34px;height:34px;background:#f1f3f7;color:#667084;border:0;border-radius:50%;font-size:23px;line-height:1;flex-shrink:0}.modal-body{padding:24px 28px 30px}.intro{font-size:14px;color:var(--muted);line-height:1.7;margin:0 0 22px}.step-label{font-size:13px;font-weight:800;margin-bottom:10px;display:block}label{display:block;font-size:13px;font-weight:700;margin:16px 0 8px}.code-row{display:flex;gap:10px}.code-row input{flex:1;min-width:0}input,textarea{width:100%;border:1px solid #dfe3eb;border-radius:10px;padding:12px;color:var(--ink);background:#fff;font-size:14px}input::placeholder,textarea::placeholder{color:#9da3af}textarea{resize:vertical}.code-row .primary{padding:12px 17px;font-size:13px;white-space:nowrap}.hint{font-size:11px;line-height:1.7;color:#848c9b;margin:9px 0}.status{font-size:13px;line-height:1.7;margin:12px 0;color:var(--muted);overflow-wrap:anywhere}#code-status[data-state="success"]{color:#128256}#code-status[data-state="error"]{color:#c3382c}fieldset{border:0;border-top:1px solid var(--line);margin:22px 0 0;padding:14px 0 0;min-width:0}legend{font-size:13px;font-weight:800;padding-right:12px}fieldset:disabled{opacity:.48}input[type=file]{background:#f8f9fc;font-size:12px}input[type=file]::file-selector-button{border:0;border-radius:6px;padding:8px 10px;background:#e9edf5;color:#42516c;margin-right:10px;cursor:pointer}.submit-wide{width:100%;margin-top:16px}.privacy-note{margin:14px 0 0;font-size:11px;color:#9097a4;line-height:1.7}.player-dialog{width:min(1160px,calc(100vw - 28px));max-height:96vh}.player-dialog .modal-header{padding:16px 22px}.player-dialog .modal-header h2{font-size:19px}.player-dialog iframe{display:block;width:100%;height:75vh;border:0;background:#fff}.preview-banner{padding:12px 20px;background:#fff2dc;color:#79571e;text-align:center;font-size:12px;line-height:1.5}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:850px){.wrap{padding:0 24px}.hero{gap:35px;grid-template-columns:1fr 190px;padding-top:48px;padding-bottom:42px}.hero h1{font-size:40px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.library-heading{align-items:flex-start;flex-direction:column;gap:17px}.tools{width:100%}.search{flex:1}.search input{width:100%}.stat-number{font-size:58px}.stat-card{padding:24px}.header-inner{min-height:80px}}
+@media(max-width:540px){.wrap{padding:0 20px}.header-inner{min-height:76px;gap:12px}.brand-icon{width:36px;height:36px;border-radius:11px}.brand-icon svg{width:24px;height:24px}.brand{gap:9px}.brand-name{font-size:15px}.brand-sub{font-size:8px;letter-spacing:1.1px}.nav-link{display:none}.nav-actions{gap:0}.nav-actions .primary{padding:11px 13px;font-size:12px;border-radius:10px;gap:5px}.nav-actions .primary svg{width:14px;height:14px}.hero{grid-template-columns:1fr;gap:25px;padding-top:37px;padding-bottom:35px}.eyebrow{font-size:9px;letter-spacing:1.5px;margin-bottom:17px}.hero h1{font-size:36px;letter-spacing:-1.7px}.hero-description{font-size:13px;line-height:1.8;margin-top:17px}.stat-card{display:flex;align-items:center;gap:14px;padding:16px 22px;border-radius:17px}.stat-number{font-size:36px;letter-spacing:-2px;margin:0;order:-1;line-height:1}.stat-label{font-size:12px}.stat-bottom,.stat-spark{display:none}.library-heading{gap:17px;margin-bottom:20px}.heading-group h2{font-size:23px}.count-badge{font-size:11px}.grid{gap:13px}.card{border-radius:14px}.card-art{height:125px;padding:13px}.art-label{left:13px;top:13px;font-size:8px}.art-caption{left:13px;bottom:12px;font-size:7px;letter-spacing:1px}.art-symbol svg{width:58px;height:58px}.art-star{right:18px;top:31px;font-size:15px}.card-content{padding:15px 13px}.card h3{font-size:15px;letter-spacing:-.5px;margin-bottom:7px}.byline{font-size:10px;gap:4px}.byline svg{width:11px;height:11px}.description{font-size:11px;line-height:1.6;min-height:36px;margin:10px 0 14px}.play-button{font-size:11px;padding:10px;gap:5px;border-radius:8px}.play-button svg{width:11px;height:11px}.bottom-callout{align-items:flex-start;flex-direction:column;gap:6px;margin-top:22px}.bottom-callout p{font-size:12px}.library{padding-bottom:34px}.modal-header{padding:22px 20px 16px}.modal-header h2{font-size:21px}.modal-body{padding:20px}.code-row{gap:8px}.code-row .primary{padding:12px;font-size:12px}.footer{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<header>
-  <small>CODING &amp; PLAY</small>
-  <h1>🎮 AI 게임 전시장</h1>
-  <p>상상하고, 만들고, 함께 플레이!</p>
-</header>
-
-<main>
-  <section class="gallery" aria-label="전시된 게임">
-    <article class="card">
-      <div class="thumbnail" aria-hidden="true">🖱️</div>
-      <h2>클릭 게임</h2>
-      <p>첫 번째 테스트 작품</p>
-      <a class="btn" href="games/test.html">게임하기 ▶</a>
-    </article>
-
-    <article class="card">
-      <div class="thumbnail" aria-hidden="true">🎮</div>
-      <h2>다음 작품</h2>
-      <p>학생들의 게임 전시 예정</p>
-      <span>준비 중</span>
-    </article>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+<symbol id="icon-pad" viewBox="0 0 64 64"><path d="M21 20h22c8 0 13 6 15 17l1 8c1 7-7 10-12 5l-6-6H23l-6 6c-5 5-13 2-12-5l1-8c2-11 7-17 15-17Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 28v12m-6-6h12" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle cx="44" cy="29" r="2.5" fill="currentColor"/><circle cx="50" cy="36" r="2.5" fill="currentColor"/></symbol>
+<symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" fill="currentColor"/></symbol>
+<symbol id="icon-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 21v-2a7 7 0 0 1 14 0v2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 0 9M20 3v6h-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="brand" href="./index.html" aria-label="코딩앤플레이 AI 게임 전시장 홈"><span class="brand-icon"><svg aria-hidden="true"><use href="#icon-pad"/></svg></span><span><strong class="brand-name">코딩앤플레이</strong><span class="brand-sub">AI GAME GALLERY</span></span></a>
+  <nav class="nav-actions" aria-label="주 메뉴"><a class="nav-link" href="#library">작품 둘러보기</a><button class="primary" id="open-upload" type="button"><span aria-hidden="true">＋</span> 내 게임 올리기</button></nav>
+</div></header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="hero-title"><div><p class="eyebrow">IMAGINE. CREATE. PLAY.</p><h1 id="hero-title">상상한 게임이,<br><span>현실이 되는 곳.</span></h1><p class="hero-description">AI와 함께 만든 나만의 게임.<br>친구들의 작품을 만나고, 함께 플레이해 보세요.</p></div><div class="stat-card"><span class="stat-spark" aria-hidden="true">✧</span><p class="stat-label">전시 중인 작품</p><p class="stat-number" id="total-count">01</p><div class="stat-bottom"><span class="green-dot"></span> 작은 아이디어, 새로운 플레이</div></div></section>
+  <section class="library" id="library" aria-labelledby="library-title">
+    <div class="library-heading"><div class="heading-group"><h2 id="library-title">게임 전시장</h2><span class="count-badge" id="result-count">1개</span></div><div class="tools"><label class="search"><span class="sr-only">게임 이름이나 별칭으로 찾기</span><svg aria-hidden="true"><use href="#icon-search"/></svg><input id="search-games" type="search" placeholder="게임 이름이나 별칭으로 찾기" autocomplete="off"></label><button class="refresh" id="reload-games" type="button"><svg aria-hidden="true"><use href="#icon-refresh"/></svg><span>새로고침</span></button></div></div>
+    <div id="published-games" class="grid" aria-label="전시 작품 목록"></div><p id="gallery-status" class="gallery-status" role="status" aria-live="polite"></p>
+    <div class="bottom-callout"><p>멋진 아이디어가 있나요?<br>직접 만든 게임을 올리고 친구들과 나눠 보세요.</p><button class="text-button" id="open-upload-bottom" type="button">나도 게임 올리기 <span aria-hidden="true">↗</span></button></div>
+    <noscript><p>게임 목록을 보려면 JavaScript를 켜 주세요. <a href="games/test.html">기존 클릭 게임 열기</a></p></noscript>
   </section>
-
-  <section id="published-games" class="gallery"
-    aria-label="승인된 작품"></section>
-  <p id="gallery-status" role="status"></p>
-
-  <div class="section-wrap">
-    <section class="upload" aria-labelledby="upload-title">
-      <h2 id="upload-title">내 게임 출품하기</h2>
-      <p>
-        선생님에게 받은 참가 코드를 확인해 주세요.
-        전시된 게임은 코드 없이 플레이할 수 있습니다.
-      </p>
-
-      <form id="code-form">
-        <label for="participant-code">참가 코드</label>
-        <div class="code-row">
-          <input id="participant-code"
-            type="text"
-            placeholder="CNP-로 시작하는 코드"
-            required maxlength="80"
-            autocomplete="off"
-            autocapitalize="off"
-            spellcheck="false"
-            aria-describedby="code-hint code-status">
-          <button id="verify-button" type="submit">
-            코드 확인
-          </button>
-        </div>
-        <p id="code-hint" class="hint">
-          참가 코드만 입력하세요. 관리자 키는 입력하지 마세요.
-        </p>
-        <p id="code-status" role="status" aria-live="polite"></p>
-      </form>
-
-      <p>
-        HTML 게임 파일 1개를 제출할 수 있습니다.
-        관리자 승인 전에는 공개되지 않습니다.
-      </p>
-
-      <form id="upload-form">
-        <fieldset id="upload-fields" disabled>
-          <legend>작품 정보</legend>
-
-          <label for="game-title">게임 제목</label>
-          <input id="game-title" required maxlength="80"
-            placeholder="게임 제목">
-
-          <label for="game-author">만든 사람의 별칭</label>
-          <input id="game-author" required maxlength="40"
-            placeholder="실명 대신 별칭을 사용해 주세요">
-
-          <label for="game-description">게임 소개</label>
-          <textarea id="game-description" rows="3"
-            maxlength="1000"
-            placeholder="조작 방법과 게임 소개"></textarea>
-
-          <label for="game-file">HTML 게임 파일</label>
-          <input id="game-file" type="file" required
-            accept=".html,text/html">
-
-          <p class="hint">
-            UTF-8 HTML 파일 1개, 최대 5MB.
-            이미지와 소리는 파일 안에 포함해 주세요.
-            외부 서버에 의존하는 기능은 제한됩니다.
-          </p>
-          <button type="submit">승인 대기로 제출</button>
-        </fieldset>
-      </form>
-
-      <p id="upload-status" role="status" aria-live="polite"></p>
-
-      <noscript>
-        <p>참가 코드 확인에는 JavaScript가 필요합니다.</p>
-      </noscript>
-    </section>
-  </div>
 </main>
-
-<dialog id="game-dialog" aria-labelledby="playing-title">
-  <button id="close-game" type="button" autofocus>
-    게임 종료 ×
-  </button>
-  <h2 id="playing-title"></h2>
-  <iframe id="game-frame"
-    title="격리된 게임 화면"
-    sandbox="allow-scripts"
-    referrerpolicy="no-referrer"></iframe>
-</dialog>
-
-<footer>코딩앤플레이 AI코딩학원</footer>
+<footer class="footer"><strong>CODING &amp; PLAY</strong><br>코딩앤플레이 AI코딩학원 · 상상하고, 만들고, 함께 플레이!</footer>
+<dialog id="upload-dialog" aria-labelledby="upload-title"><div class="modal-header"><h2 id="upload-title">내 게임 올리기</h2><button id="close-upload" class="icon-button" aria-label="업로드 창 닫기" type="button">×</button></div><div class="modal-body"><p class="intro">선생님에게 받은 참가 코드를 확인하고<br>나만의 게임을 전시장에 제출해 주세요.</p>
+  <form id="code-form"><label for="participant-code" class="step-label">01. 참가 코드 확인</label><div class="code-row"><input id="participant-code" type="text" placeholder="예: coding" required maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="code-hint code-status"><button id="verify-button" type="submit" class="primary">코드 확인</button></div><p id="code-hint" class="hint">선생님에게 받은 코드를 입력하세요. 대소문자를 구분합니다.</p><p id="code-status" class="status" role="status" aria-live="polite"></p></form>
+  <form id="upload-form"><fieldset id="upload-fields" disabled><legend>02. 작품 정보 입력</legend><label for="game-title">게임 제목</label><input id="game-title" required maxlength="80" placeholder="나만의 게임 이름"><label for="game-author">만든 사람의 별칭</label><input id="game-author" required maxlength="40" placeholder="친구들에게 보여 줄 별칭"><label for="game-description">게임 소개</label><textarea id="game-description" rows="3" maxlength="1000" placeholder="어떤 게임인가요? 조작 방법도 알려 주세요."></textarea><label for="game-file">게임 파일</label><input id="game-file" type="file" required accept=".html,text/html"><p class="hint">HTML 파일 1개 · 최대 5MB<br>이미지와 소리는 파일 안에 포함해 주세요. 외부 서비스 연결은 제한됩니다.</p><button class="primary submit-wide" type="submit">승인 대기로 제출하기 <span aria-hidden="true">↗</span></button></fieldset></form><p id="upload-status" class="status" role="status" aria-live="polite"></p><p class="privacy-note">제출한 작품은 선생님이 확인한 뒤 공개됩니다.<br>작품과 별칭에 실명·연락처 등 개인정보를 넣지 마세요.</p>
+</div></dialog>
+<dialog id="game-dialog" class="player-dialog" aria-labelledby="playing-title"><div class="modal-header"><h2 id="playing-title"></h2><button id="close-game" class="icon-button" aria-label="게임 종료" type="button" autofocus>×</button></div><iframe id="game-frame" title="격리된 게임 화면" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></dialog>
 
 <script>
+
 (() => {
-  const API =
-    'https://codingnplay-gallery-api.jjhyun2335.workers.dev';
-  const PLAYER =
-    'https://codingnplay-gallery-player.jjhyun2335.workers.dev';
-
-  const el = id => document.getElementById(id);
-  const input = el('participant-code');
-  const verifyButton = el('verify-button');
-  const fields = el('upload-fields');
-
-  let token = '';
-  let expiresAt = 0;
-  let checking = false;
-  let uploading = false;
-  let revision = 0;
-
-  const errors = {
-    invalid_code:
-      '코드가 맞지 않거나 만료·취소·사용 한도에 도달했습니다.',
-    too_many_attempts:
-      '요청이 많습니다. 10분 후 다시 시도해 주세요.',
-    upload_permission_denied:
-      '참가 코드를 다시 확인해 주세요.',
-    upload_already_used:
-      '이 권한은 이미 사용됐습니다. 선생님에게 제출 여부를 확인해 주세요.',
-    html_only:
-      '확장자가 .html인 파일만 제출할 수 있습니다.',
-    file_too_large:
-      '파일은 최대 5MB입니다.',
-    invalid_file:
-      'UTF-8로 저장된 HTML 문서인지 확인해 주세요.',
-    invalid_metadata:
-      '제목·별칭·소개를 확인해 주세요.',
-    storage_limit_reached:
-      '전시장 저장량 한도에 도달했습니다. 선생님에게 알려 주세요.',
-    game_limit_reached:
-      '게임 개수 한도에 도달했습니다. 선생님에게 알려 주세요.',
-    upload_uncertain:
-      '저장 결과를 확인하지 못했습니다. 선생님에게 제출 목록 확인을 요청해 주세요.'
-  };
-
-  function show(message, state = '') {
-    el('code-status').textContent = message;
-    el('code-status').dataset.state = state;
-  }
-
-  function reset() {
-    token = '';
-    expiresAt = 0;
-    fields.disabled = true;
-  }
-
-  input.addEventListener('input', () => {
-    revision++;
-    reset();
-    show('');
-  });
-
-  el('code-form').addEventListener('submit', async event => {
-    event.preventDefault();
-    if (checking || uploading) return;
-
-    const code = input.value.trim();
-
-    if (!/^[A-Za-z0-9-]{16,80}$/.test(code)) {
-      show('발급받은 참가 코드를 빠짐없이 입력해 주세요.', 'error');
-      return;
-    }
-
-    checking = true;
-    reset();
-    const current = ++revision;
-    verifyButton.disabled = true;
-    verifyButton.textContent = '확인 중…';
-
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
-
+  const API='https://codingnplay-gallery-api.jjhyun2335.workers.dev';
+  const PLAYER='https://codingnplay-gallery-player.jjhyun2335.workers.dev';
+  const el=id=>document.getElementById(id);
+  const input=el('participant-code'),verifyButton=el('verify-button'),fields=el('upload-fields');
+  let token='',expiresAt=0,checking=false,uploading=false,revision=0;
+  function show(message,state=''){el('code-status').textContent=message;el('code-status').dataset.state=state;}
+  function reset(){token='';expiresAt=0;fields.disabled=true;}
+  const errors={invalid_code:'코드가 맞지 않거나 만료·취소·사용 한도에 도달했습니다.',too_many_attempts:'요청이 많습니다. 10분 후 다시 시도해 주세요.',upload_permission_denied:'참가 코드를 다시 확인해 주세요.',upload_already_used:'이 권한은 이미 사용됐습니다. 선생님에게 제출 여부를 확인해 주세요.',html_only:'확장자가 .html인 파일만 제출할 수 있습니다.',file_too_large:'파일은 최대 5MB입니다.',invalid_file:'UTF-8로 저장된 HTML 문서인지 확인해 주세요.',invalid_metadata:'제목·별칭·소개를 확인해 주세요.',storage_limit_reached:'전시장 저장량 한도에 도달했습니다. 선생님에게 알려 주세요.',game_limit_reached:'게임 개수 한도에 도달했습니다. 선생님에게 알려 주세요.',upload_uncertain:'저장 결과를 확인하지 못했습니다. 선생님에게 제출 목록 확인을 요청해 주세요.'};
+  input.addEventListener('input',()=>{revision++;reset();show('');});
+  el('code-form').addEventListener('submit',async event=>{
+    event.preventDefault();if(checking||uploading)return;
+    const code=input.value.trim();
+    if(!/^[A-Za-z0-9-]{4,80}$/.test(code)){show('발급받은 참가 코드를 빠짐없이 입력해 주세요.','error');return;}
+    checking=true;reset();const current=++revision;verifyButton.disabled=true;verifyButton.textContent='확인 중…';
+    const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);
     try {
-      const response = await fetch(API + '/verify-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'omit',
-        cache: 'no-store',
-        body: JSON.stringify({ code }),
-        signal: controller.signal
-      });
-
-      const data = await response.json();
-      if (current !== revision) return;
-
-      if (!response.ok || !data.ok) {
-        throw new Error(
-          errors[data.error] ||
-          '지금은 코드를 확인할 수 없습니다. 잠시 후 다시 시도해 주세요.'
-        );
-      }
-
-      token = data.uploadToken;
-      expiresAt = data.expiresAt;
-      fields.disabled = !data.uploadsEnabled;
-
-      show(
-        data.uploadsEnabled
-          ? '유효한 참가 코드입니다. 15분 안에 작품을 제출하세요.'
-          : '유효한 코드입니다. 업로드는 준비 중입니다.',
-        'success'
-      );
-    } catch (error) {
-      if (current === revision) {
-        show(
-          error.name === 'AbortError'
-            ? '응답이 늦습니다. 다시 확인해 주세요.'
-            : error.message,
-          'error'
-        );
-      }
-    } finally {
-      clearTimeout(timeout);
-      checking = false;
-      verifyButton.disabled = false;
-      verifyButton.textContent = '코드 확인';
-    }
+      const response=await fetch(API+'/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',cache:'no-store',body:JSON.stringify({code}),signal:controller.signal});
+      const data=await response.json();if(current!==revision)return;
+      if(!response.ok||!data.ok)throw new Error(errors[data.error]||'지금은 코드를 확인할 수 없습니다. 잠시 후 다시 시도해 주세요.');
+      token=data.uploadToken;expiresAt=data.expiresAt;fields.disabled=!data.uploadsEnabled;
+      show(data.uploadsEnabled?'유효한 참가 코드입니다. 15분 안에 작품을 제출하세요.':'유효한 코드입니다. 업로드는 준비 중입니다.','success');
+    } catch(error){if(current===revision)show(error.name==='AbortError'?'응답이 늦습니다. 다시 확인해 주세요.':error.message,'error');}
+    finally{clearTimeout(timeout);checking=false;verifyButton.disabled=false;verifyButton.textContent='코드 확인';}
   });
-
-  el('upload-form').addEventListener('submit', async event => {
-    event.preventDefault();
-    if (uploading) return;
-
-    if (!token || Date.now() / 1000 >= expiresAt) {
-      reset();
-      show('참가 코드를 다시 확인해 주세요.', 'error');
-      return;
-    }
-
-    const file = el('game-file').files[0];
-
-    if (!file || !file.size || file.size > 5242880 ||
-        !/\.html$/i.test(file.name)) {
-      el('upload-status').textContent =
-        '5MB 이하의 .html 파일을 선택해 주세요.';
-      return;
-    }
-
-    const meta = {
-      title: el('game-title').value.trim(),
-      author: el('game-author').value.trim(),
-      description: el('game-description').value
-    };
-
-    if (!meta.title || !meta.author) {
-      el('upload-status').textContent =
-        '게임 제목과 별칭을 입력해 주세요.';
-      return;
-    }
-
-    uploading = true;
-    fields.disabled = true;
-    input.disabled = true;
-    verifyButton.disabled = true;
-    el('upload-status').textContent = '작품을 제출하고 있습니다…';
-
-    let success = false;
-
-    try {
-      const response = await fetch(API + '/uploads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'X-Upload-Token': token,
-          'X-File-Name': encodeURIComponent(file.name),
-          'X-Game-Metadata':
-            encodeURIComponent(JSON.stringify(meta))
-        },
-        credentials: 'omit',
-        body: file
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 401 || response.status === 409) {
-          reset();
-        }
-        throw new Error(
-          errors[data.error] ||
-          '제출하지 못했습니다. 참가 코드를 다시 확인하거나 선생님에게 알려 주세요.'
-        );
-      }
-
-      success = true;
-      el('upload-status').textContent = data.alreadyUploaded
-        ? '이 제출은 이미 접수됐습니다. 관리자 승인 대기 중입니다.'
-        : '제출 완료! 관리자 승인 후 전시장에 표시됩니다.';
-
-      reset();
-      el('upload-form').reset();
-      show('다른 작품을 제출하려면 참가 코드를 다시 확인하세요.');
-    } catch (error) {
-      el('upload-status').textContent =
-        error instanceof TypeError
-          ? '서버 응답을 받지 못했습니다. 같은 파일로 다시 제출하면 기존 접수 여부를 확인합니다.'
-          : error.message;
-    } finally {
-      uploading = false;
-      input.disabled = false;
-      verifyButton.disabled = false;
-      if (!success) fields.disabled = !token;
-    }
+  el('upload-form').addEventListener('submit',async event=>{
+    event.preventDefault();if(uploading)return;
+    if(!token||Date.now()/1000>=expiresAt){reset();show('참가 코드를 다시 확인해 주세요.','error');return;}
+    const file=el('game-file').files[0];
+    if(!file||!file.size||file.size>5242880||!/\.html$/i.test(file.name)){el('upload-status').textContent='5MB 이하의 .html 파일을 선택해 주세요.';return;}
+    const meta={title:el('game-title').value.trim(),author:el('game-author').value.trim(),description:el('game-description').value};
+    if(!meta.title||!meta.author){el('upload-status').textContent='게임 제목과 별칭을 입력해 주세요.';return;}
+    uploading=true;fields.disabled=true;input.disabled=true;verifyButton.disabled=true;el('upload-status').textContent='작품을 제출하고 있습니다…';
+    let success=false;
+    try{
+      const response=await fetch(API+'/uploads',{method:'POST',headers:{'Content-Type':'text/html; charset=utf-8','X-Upload-Token':token,'X-File-Name':encodeURIComponent(file.name),'X-Game-Metadata':encodeURIComponent(JSON.stringify(meta))},credentials:'omit',body:file});
+      const data=await response.json();
+      if(!response.ok){if(response.status===401||response.status===409)reset();throw new Error(errors[data.error]||'제출하지 못했습니다. 참가 코드를 다시 확인하거나 선생님에게 알려 주세요.');}
+      success=true;el('upload-status').textContent=data.alreadyUploaded?'이 제출은 이미 접수됐습니다. 관리자 승인 대기 중입니다.':'제출 완료! 관리자 승인 후 전시장에 표시됩니다.';
+      reset();el('upload-form').reset();show('다른 작품을 제출하려면 참가 코드를 다시 확인하세요.');
+    }catch(error){el('upload-status').textContent=error instanceof TypeError?'서버 응답을 받지 못했습니다. 같은 파일로 다시 제출하면 기존 접수 여부를 확인합니다.':error.message;}
+    finally{uploading=false;input.disabled=false;verifyButton.disabled=false;if(!success)fields.disabled=!token;}
   });
-
-  const dialog = el('game-dialog');
-  const frame = el('game-frame');
-
-  el('close-game').addEventListener('click', () => dialog.close());
-
-  dialog.addEventListener('close', () => {
-    frame.removeAttribute('src');
-  });
-
-  async function loadGames() {
-    try {
-      const response = await fetch(API + '/games', {
-        credentials: 'omit',
-        cache: 'no-store'
-      });
-
-      if (!response.ok) throw new Error('list');
-
-      const data = await response.json();
-      if (!data.ok || !Array.isArray(data.games)) {
-        throw new Error('list');
-      }
-
-      el('published-games').replaceChildren();
-
-      for (const game of data.games) {
-        if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i
-            .test(game.id)) continue;
-
-        const card = document.createElement('article');
-        card.className = 'card';
-
-        const thumb = document.createElement('div');
-        thumb.className = 'thumbnail';
-        thumb.textContent = '🎮';
-        thumb.setAttribute('aria-hidden', 'true');
-
-        const title = document.createElement('h2');
-        title.textContent = game.title;
-
-        const author = document.createElement('p');
-        author.textContent = '만든 사람: ' + game.author_name;
-
-        const desc = document.createElement('p');
-        desc.textContent = game.description;
-
-        const button = document.createElement('button');
-        button.className = 'btn';
-        button.textContent = '게임하기 ▶';
-
-        button.addEventListener('click', () => {
-          el('playing-title').textContent = game.title;
-          frame.src = PLAYER + '/games/' + game.id;
-          dialog.showModal();
-        });
-
-        card.append(thumb, title, author, desc, button);
-        el('published-games').append(card);
-      }
-
-      el('gallery-status').textContent = data.games.length
-        ? ''
-        : '새 작품은 관리자 승인 후 이곳에 전시됩니다.';
-    } catch {
-      el('gallery-status').textContent =
-        '새 작품 목록을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
+  const uploadDialog=el('upload-dialog');
+  function openUpload(){uploadDialog.showModal();input.focus();}
+  el('open-upload').addEventListener('click',openUpload);
+  el('open-upload-bottom').addEventListener('click',openUpload);
+  el('close-upload').addEventListener('click',()=>{if(!uploading)uploadDialog.close();});
+  uploadDialog.addEventListener('cancel',event=>{if(uploading)event.preventDefault();});
+  const dialog=el('game-dialog'),frame=el('game-frame');
+  el('close-game').addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>frame.removeAttribute('src'));
+  const builtin={id:'legacy-test',title:'클릭 게임',author_name:'코딩앤플레이',description:'첫 번째 테스트 작품. 클릭하며 가볍게 즐겨 보세요.'};
+  let games=[builtin],loading=false;
+  function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#icon-'+name);svg.setAttribute('aria-hidden','true');svg.append(use);return svg;}
+  function renderGames(){
+    const query=el('search-games').value.trim().toLocaleLowerCase('ko');
+    const shown=games.filter(game=>[game.title,game.author_name,game.description].some(value=>String(value||'').toLocaleLowerCase('ko').includes(query)));
+    el('published-games').replaceChildren();el('result-count').textContent=shown.length+'개';el('total-count').textContent=String(games.length).padStart(2,'0');
+    for(const game of shown){
+      const card=document.createElement('article');card.className='card';
+      const art=document.createElement('div');art.className='card-art';art.setAttribute('aria-hidden','true');
+      const label=document.createElement('span');label.className='art-label';label.textContent='GAME';
+      const symbol=document.createElement('span');symbol.className='art-symbol';symbol.append(icon('pad'));
+      const caption=document.createElement('span');caption.className='art-caption';caption.textContent='MADE WITH AI';
+      const star=document.createElement('span');star.className='art-star';star.textContent='✧';art.append(label,symbol,caption,star);
+      const content=document.createElement('div');content.className='card-content';
+      const title=document.createElement('h3');title.textContent=game.title;
+      const author=document.createElement('p');author.className='byline';const alias=document.createElement('span');alias.textContent=game.author_name;author.append(icon('person'),alias);
+      const description=document.createElement('p');description.className='description';description.textContent=game.description||'직접 플레이하며 이 게임의 재미를 발견해 보세요.';
+      const play=document.createElement('button');play.className='play-button';play.type='button';play.append(icon('play'),document.createTextNode('게임하기'));
+      play.addEventListener('click',()=>{el('playing-title').textContent=game.title;frame.src=game.id==='legacy-test'?'games/test.html':PLAYER+'/games/'+game.id;dialog.showModal();});
+      content.append(title,author,description,play);card.append(art,content);el('published-games').append(card);
     }
+    if(!shown.length){const empty=document.createElement('p');empty.className='empty-note';empty.textContent='검색 결과가 없습니다. 다른 이름으로 찾아보세요.';el('published-games').append(empty);}
   }
-
-  loadGames();
+  el('search-games').addEventListener('input',renderGames);
+  async function loadGames(){
+    if(loading)return;loading=true;el('reload-games').disabled=true;el('gallery-status').textContent='새 작품을 불러오고 있습니다…';
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
+    try{
+      const response=await fetch(API+'/games',{credentials:'omit',cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error('list');
+      const data=await response.json();if(!data.ok||!Array.isArray(data.games))throw new Error('list');
+      games=[...data.games.filter(game=>game&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(game.id)),builtin];
+      renderGames();el('gallery-status').textContent='';
+    }catch{renderGames();el('gallery-status').textContent='새 작품 목록을 불러오지 못했습니다. 새로고침을 눌러 다시 확인해 주세요.';}
+    finally{clearTimeout(timer);loading=false;el('reload-games').disabled=false;}
+  }
+  el('reload-games').addEventListener('click',loadGames);
+  renderGames();loadGames();
 })();
+
 </script>
 </body>
 </html>
